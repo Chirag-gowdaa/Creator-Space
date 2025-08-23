@@ -1,103 +1,183 @@
-import Image from "next/image";
+"use client"
+import React, { useState, useEffect } from "react";
+import Navbar from "../app/components/Navbar";
+import Footer from "../app/components/Footer";
+import { FaSearch } from "react-icons/fa";
 
-export default function Home() {
+const Page = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div style={{ position: "relative", minHeight: "100vh", width: "100%" }}>
+      {/* Spline Background */}
+      <iframe
+        src="https://my.spline.design/particles-exDghJkLB03GKmf9Ay0hpkMj/"
+        frameBorder="0"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: -1,
+          width: "100%",
+          height: "100%",
+          border: "none",
+        }}
+      ></iframe>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      {/* Foreground Content */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          height: "calc(100vh - 80px)",
+          padding: isMobile ? "20px" : "0 50px",
+          color: "white",
+          zIndex: 1,
+          position: "relative",
+          flexDirection: isMobile ? "column" : "row",
+        }}
+      >
+        {/* Left Side Text */}
+        <div
+          style={{
+            maxWidth: isMobile ? "100%" : "30%",
+            textAlign: isMobile ? "center" : "left",
+            marginBottom: isMobile ? "30px" : "0",
+            marginTop: isMobile ? "50px" : "0",
+          }}
+        >
+          <h1 style={{ fontSize: "2rem", marginBottom: "10px" }}>
+            Collaborate & Create
+          </h1>
+          <p style={{ color: "#ccc", marginBottom: "15px" }}>
+            Space where all creators gather, share ideas, and work together.
+          </p>
+
+          <div
+            style={{
+              position: "relative",
+              width: isMobile ? "100%" : "300px",
+              margin: "0 auto",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+            <FaSearch
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "10px",
+                transform: "translateY(-50%)",
+                color: "#aaa",
+              }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <input
+              type="search"
+              placeholder="Search creators..."
+              style={{
+                width: "100%",
+                padding: "10px 10px 10px 35px",
+                borderRadius: "8px",
+                border: '1px solid #8c8c8c',
+                backgroundColor: "#222",
+                color: '#bfbfbf',
+                outline: "none",
+                fontSize: "0.9rem",
+                fontWeight: '600',
+                boxShadow: '0 0 8px rgba(160, 160, 160, 0.4)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#bfbfbf';
+                e.target.style.color = '#1a1a1a';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = '#222';
+                e.target.style.color = '#bfbfbf';
+              }}
+            />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Right Side Text */}
+        <div
+          style={{
+            maxWidth: isMobile ? "100%" : "30%",
+            textAlign: isMobile ? "center" : "right",
+          }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <h1 style={{ fontSize: "2rem", marginBottom: "10px" }}>
+            Join the Movement
+          </h1>
+          <p style={{ color: "#ccc", paddingBottom: '20px' }}>
+            Sign up today and be a part of the future of creative collaboration.
+          </p>
+          <div style={{
+            display: "flex",
+            flexDirection: isMobile ? "column" : "row",
+            gap: "10px",
+            justifyContent: isMobile ? "center" : "flex-end"
+          }}>
+            <a
+              href="/signup"
+              style={{
+                padding: '0.5rem 1rem',
+                border: '1px solid #a8a8a8',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: '#d0d0d0',
+                fontWeight: '600',
+                boxShadow: '0 0 8px rgba(180, 180, 180, 0.4)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#d0d0d0';
+                e.target.style.color = '#1a1a1a';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = '#d0d0d0';
+              }}
+            >
+              Sign Up
+            </a>
+
+            <a
+              href="/read"
+              style={{
+                padding: '0.5rem 1rem',
+                border: '1px solid #8c8c8c',
+                borderRadius: '6px',
+                textDecoration: 'none',
+                color: '#bfbfbf',
+                fontWeight: '600',
+                boxShadow: '0 0 8px rgba(160, 160, 160, 0.4)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.background = '#bfbfbf';
+                e.target.style.color = '#1a1a1a';
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.background = 'transparent';
+                e.target.style.color = '#bfbfbf';
+              }}
+            >
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <Footer />
     </div>
   );
-}
+};
+
+export default Page;
