@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-
+import toast from "react-hot-toast";
 const ProfileForm = () => {
     const [formData, setFormData] = useState({
         name: "",
@@ -135,6 +135,7 @@ const ProfileForm = () => {
                         hover:from-zinc-700 hover:via-zinc-800 hover:to-zinc-900
                         border border-white/10 shadow-md shadow-black/40
                         text-white relative overflow-hidden group"
+                        onClick={() => toast.success('Profile Updated Successfully!')}
                 >
                     <span className="relative z-10">Save Profile</span>
                     <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent 

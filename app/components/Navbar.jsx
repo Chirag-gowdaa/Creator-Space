@@ -3,13 +3,12 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-
+import NewsNavBar from "./NewsNavBar";
 const Navbar = () => {
   const { data: session } = useSession();
   const [open, setOpen] = useState(false); // Profile dropdown
   const [menuOpen, setMenuOpen] = useState(false); // Mobile menu
   const [isMobile, setIsMobile] = useState(false);
-
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 768);
     handleResize();
@@ -53,6 +52,8 @@ const Navbar = () => {
       {/* Desktop Links */}
       {!isMobile && !session && (
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+         {/* <a href="/News" className="hover-glow">What's New<span className="absolute -top-1 -right-3 h-2 w-2 border-gray-500 rounded-full"></span></a> */}
+         <NewsNavBar />
           <a href="/About" className="hover-glow">About</a>
           <a href="/Support" className="hover-glow">Support</a>
           <a href="/more" className="hover-glow">More</a>
@@ -161,10 +162,13 @@ const Navbar = () => {
             &times;
           </button>
 
-          <a href="/about" className="hover-glow" onClick={() => setMenuOpen(false)}>
+          <a href="/News" className="hover-glow" onClick={() => setMenuOpen(false)}>
+            What's New
+          </a>
+          <a href="/About" className="hover-glow" onClick={() => setMenuOpen(false)}>
             About
           </a>
-          <a href="/support" className="hover-glow" onClick={() => setMenuOpen(false)}>
+          <a href="/Support" className="hover-glow" onClick={() => setMenuOpen(false)}>
             Support
           </a>
           <a href="/more" className="hover-glow" onClick={() => setMenuOpen(false)}>
@@ -227,8 +231,8 @@ const Navbar = () => {
       {session && (
         <div
           className={`flex ${isMobile
-              ? "flex-col items-center w-full gap-3 text-center"
-              : "flex-row items-center gap-8"
+            ? "flex-col items-center w-full gap-3 text-center"
+            : "flex-row items-center gap-8"
             }`}
         >
           {/* Search Input */}
@@ -281,7 +285,7 @@ const Navbar = () => {
                   { name: "Dashboard", link: `/${session.user.name}` },
                   { name: "Edit Profile", link: "/info" },
                   { name: "About", link: "/About" },
-                  { name: "Support", link: "/support" },
+                  { name: "Support", link: "/Support" },
                 ].map((item, idx) => (
                   <Link
                     key={idx}
@@ -324,7 +328,7 @@ const Navbar = () => {
                 e.target.style.background = "transparent";
                 e.target.style.color = "#bfbfbf";
               }}
-               onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
+              onClick={() => signOut({ redirect: true, callbackUrl: "/" })}
             >
               Logout
             </a>
