@@ -239,7 +239,11 @@ const Navbar = () => {
           {!isMobile && (
             <div className="flex gap-4">
               <a href="/explore" className="text-gray-300 hover:text-white transition font-semibold">Explore</a>
+              <a href="/feed" className="text-gray-300 hover:text-white transition font-semibold">Feed</a>
+              <a href="/trending" className="text-gray-300 hover:text-white transition font-semibold">Trending</a>
+              <a href="/recommendations" className="text-gray-300 hover:text-white transition font-semibold">For You</a>
               <a href="/dashboard" className="text-gray-300 hover:text-white transition font-semibold">Dashboard</a>
+              <a href="/messages" className="text-gray-300 hover:text-white transition font-semibold">Messages</a>
             </div>
           )}
 
