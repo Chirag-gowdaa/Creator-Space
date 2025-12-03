@@ -8,22 +8,23 @@ import { Toaster } from "react-hot-toast";
 function LayoutWithSession({ children }) {
   const pathname = usePathname();
   const decodedPath = decodeURIComponent(pathname);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
-  // Hide Navbar/Footer for payment pages
+  if (status === "loading") return null; // Prevents early render errors
+
   const hideLayout = decodedPath.endsWith("/payment");
-
-  // Hide Navbar/Footer for dashboard pages
   const isDashboard = session && decodedPath.startsWith(`/${session.user.name}`);
+  const isAuthCallback = decodedPath.startsWith("/api/auth");
 
   return (
     <>
-      {!hideLayout && !isDashboard && <Navbar session={session} />}
+      {!hideLayout && !isDashboard && !isAuthCallback && <Navbar session={session} />}
       <main className="flex-1">{children}</main>
-      {!hideLayout && !isDashboard && <Footer />}
+      {!hideLayout && !isDashboard && !isAuthCallback && <Footer />}
     </>
   );
 }
+
 
 export default function Providers({ children }) {
   return (

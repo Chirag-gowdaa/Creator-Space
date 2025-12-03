@@ -33,23 +33,25 @@ export const authOptions = {
     },
 
     async signIn({ user }) {
-      try {
-        await connectDB();
-        let currentUser = await User.findOne({ email: user.email });
 
-        if (!currentUser) {
-          currentUser = await User.create({
-            email: user.email,
-            username: user.name || user.email.split("@")[0],
-            profilePic: user.image || "",
-          });
-        }
+      return true;
+      // try {
+      //   await connectDB();
+      //   let currentUser = await User.findOne({ email: user.email });
 
-        return true; // Must return true for login to succeed
-      } catch (err) {
-        console.error("SignIn error:", err);
-        return false; // Returning false denies login
-      }
+      //   if (!currentUser) {
+      //     currentUser = await User.create({
+      //       email: user.email,
+      //       username: user.name || user.email.split("@")[0],
+      //       profilePic: user.image || "",
+      //     });
+      //   }
+
+      //   return true; // Must return true for login to succeed
+      // } catch (err) {
+      //   console.error("SignIn error:", err);
+      //   return false; // Returning false denies login
+      // }
     },
 
 

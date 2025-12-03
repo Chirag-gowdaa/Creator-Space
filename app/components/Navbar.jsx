@@ -235,6 +235,14 @@ const Navbar = () => {
             : "flex-row items-center gap-8"
             }`}
         >
+          {/* Navigation Links */}
+          {!isMobile && (
+            <div className="flex gap-4">
+              <a href="/explore" className="text-gray-300 hover:text-white transition font-semibold">Explore</a>
+              <a href="/dashboard" className="text-gray-300 hover:text-white transition font-semibold">Dashboard</a>
+            </div>
+          )}
+
           {/* Search Input */}
           <input
             type="search"
@@ -282,8 +290,9 @@ const Navbar = () => {
             {open && (
               <div className="absolute mt-2 w-40 bg-[#1e1e1e] border border-gray-700 rounded-md shadow-lg z-20">
                 {[
-                  { name: "Dashboard", link: `/${session.user.name}` },
-                  { name: "Edit Profile", link: "/info" },
+                  { name: "Dashboard", link: `/dashboard` },
+                  { name: "Edit Profile", link: "/edit-profile" },
+                  { name: "View Profile", link: `/${session.user.name}` },
                   { name: "About", link: "/About" },
                   { name: "Support", link: "/Support" },
                 ].map((item, idx) => (

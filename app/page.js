@@ -149,7 +149,7 @@ const Page = () => {
             </a>
 
             <a
-              href="/read"
+              href="/explore"
               style={{
                 padding: '0.5rem 1rem',
                 border: '1px solid #8c8c8c',
@@ -169,7 +169,7 @@ const Page = () => {
                 e.target.style.color = '#bfbfbf';
               }}
             >
-              Read More
+              Explore Creators
             </a>
           </div>
         </div>
